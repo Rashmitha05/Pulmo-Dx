@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulmo-Dx | Lung Health Risk Assessment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Pulmo-Dx</h1>
+        <p>Lung Health Risk Assessment</p>
+    </header>
+    <main>
+        <section class="diagnosis-container">
+            <div class="diagnosis-options">
+                <button id="tb-btn">Diagnose report</button>
+            </div>
+            <div id="tb-upload" class="upload-section">
+                <h3>Upload X-ray Report for Analysis</h3>
+                <p>
+                    Please upload a X-ray report in png, jpeg, jpg format for analysis.
+                </p>
+                <form method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" accept=".jpeg, .png, .jpg" required>
+                    <label for="file">X-ray report</label>
+                    <button type="submit">Analyze</button>
+                </form>
+            </div>
+            {% if filename %}
+                <div class="result-section">
+                    <h3>Uploaded Image:</h3>
+                    <img src="{{ url_for('display_image', filename=filename) }}" class="img-fluid">
+                    <h3>Prediction:</h3>
+                    <p>{{ prediction }}</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
